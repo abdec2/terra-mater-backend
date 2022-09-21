@@ -17,6 +17,9 @@ module.exports = ({ env }) => ({
         },
       },
     },
-    // ...
+    'webthree-auth': {
+      enabled: true,
+      resolve: './src/plugins/webthree-auth'
+    },
   });
   
