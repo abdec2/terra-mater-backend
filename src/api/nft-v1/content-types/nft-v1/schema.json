@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nft_v1s",
+  "info": {
+    "singularName": "nft-v1",
+    "pluralName": "nft-v1s",
+    "displayName": "Nft_v1",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "collection": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::collection.collection"
+    },
+    "token_name": {
+      "type": "string",
+      "required": true
+    },
+    "owner": {
+      "type": "string",
+      "required": true
+    },
+    "views": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "likes": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "token_id": {
+      "type": "integer",
+      "required": true
+    },
+    "token_standard": {
+      "type": "string",
+      "required": true
+    },
+    "nft_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::nft-status.nft-status"
+    },
+    "img_url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
