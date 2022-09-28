@@ -57,9 +57,12 @@
       "relation": "oneToOne",
       "target": "api::nft-status.nft-status"
     },
-    "img_url": {
-      "type": "string",
-      "required": true
+    "img": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
