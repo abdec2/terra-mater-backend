@@ -8,20 +8,20 @@ module.exports = {
   importData: async (ctx, next) => {
     try {
       fs.readFile(ctx.request.files.file.path,'utf8', async (err, data) => {
-        const Gateway = 'https://gateway.pinata.cloud/ipfs/';
+        // const Gateway = 'https://gateway.pinata.cloud/ipfs/';
         const collectionId = ctx.request.body.collection;
         const tokenStandard = ctx.request.body.standard;
         const json = JSON.parse(data);
         json.map(async item => {
           try {
-            const imgUrl = item.image.slice(7);
+            const imgUrl = item.image;
             const entryData = {
               token_name: item.name,
               owner: '',
               description: item.description,
               token_id: item.edition,
               token_standard: tokenStandard,
-              img_url: Gateway + imgUrl,
+              img_url: imgUrl,
               collection: parseInt(collectionId),
               nft_status: 1,
               publishedAt: new Date().toISOString()
@@ -30,10 +30,10 @@ module.exports = {
               data:entryData
             });
 
-            const imageurl = Gateway + imgUrl;
-            console.log(imageurl);
+            // const imageurl = Gateway + imgUrl;
+            // console.log(imageurl);
 
-            await strapi.service('api::dump-nft.dump-nft').saveImageFromUrl(imageurl, item.edition, nft.id)
+            // await strapi.service('api::dump-nft.dump-nft').saveImageFromUrl(imageurl, item.edition, nft.id)
 
             try {
               item.attributes.map(async prop => {
