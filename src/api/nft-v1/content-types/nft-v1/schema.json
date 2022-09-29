@@ -23,7 +23,7 @@
     },
     "owner": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "views": {
       "type": "integer",
