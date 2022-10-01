@@ -52,7 +52,7 @@ module.exports = createCoreController('api::nft-v1.nft-v1', ({strapi}) => ({
     }, 
     async findWithFilters(ctx) {
         const { categories, status, collections, page } = ctx.query;
-        const limit = 24;
+        const limit = 100;
         const conditions = [];
         
 
