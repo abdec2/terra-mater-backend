@@ -8,7 +8,11 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::nft-v1.nft-v1', ({strapi}) => ({
     async find(ctx) {
-        const { page, collectionId } = ctx.query;
+        let { page, collectionId } = ctx.query;
+        console.log(page)
+        if(page === undefined) {
+            page = 1;
+        }
         const limit = 24;
         const query = {
             orderBy: 'id',
@@ -27,10 +31,9 @@ module.exports = createCoreController('api::nft-v1.nft-v1', ({strapi}) => ({
                 collection: collectionId
             };
         }
-        const entity = await strapi.db.query('api::nft-v1.nft-v1').findMany(query);
-
+        const [entity, count] = await strapi.db.query('api::nft-v1.nft-v1').findWithCount(query);
         // const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
-        return entity;
+        return {data: entity, meta: {page, pageSize: limit, pageCount: Math.ceil(count / limit), total: count}};
     }, 
     async findOne(ctx) {
         const {id} = ctx.params;
