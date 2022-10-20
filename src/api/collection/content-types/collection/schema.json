@@ -53,6 +53,15 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "required": true,
+      "default": "Inactive"
     }
   }
 }
