@@ -6,11 +6,10 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::nft-v1.nft-v1', ({strapi}) => ({
+module.exports = createCoreController('api::nft-v1.nft-v1', ({ strapi }) => ({
     async find(ctx) {
         let { page, collectionId, statuses } = ctx.query;
-        console.log(statuses)
-        if(page === undefined) {
+        if (page === undefined) {
             page = 1;
         }
         const limit = 24;
@@ -36,17 +35,17 @@ module.exports = createCoreController('api::nft-v1.nft-v1', ({strapi}) => ({
             })
         }
 
-        if(statuses !== undefined) {
+        if (statuses !== undefined) {
             query.where['$and'].push({
                 nft_status: JSON.parse(statuses)
             })
         }
         const [entity, count] = await strapi.db.query('api::nft-v1.nft-v1').findWithCount(query);
         // const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
-        return {data: entity, meta: {page, pageSize: limit, pageCount: Math.ceil(count / limit), total: count}};
-    }, 
+        return { data: entity, meta: { page, pageSize: limit, pageCount: Math.ceil(count / limit), total: count } };
+    },
     async findOne(ctx) {
-        const {id} = ctx.params;
+        const { id } = ctx.params;
 
         const entity = await strapi.entityService.findOne('api::nft-v1.nft-v1', id, {
             populate: {
@@ -61,50 +60,12 @@ module.exports = createCoreController('api::nft-v1.nft-v1', ({strapi}) => ({
                 nft_v_1: id
             }
         })
-        return {...entity, props};
-    }, 
+        return { ...entity, props };
+    },
     async findWithFilters(ctx) {
-        const { categories, status, collections, page } = ctx.query;
-        const limit = 100;
-        const conditions = [];
-        
-
-        if(categories !== undefined) {
-            conditions.push({
-                collection: {
-                    category: {
-                        id: {
-                            $in: JSON.parse(categories)
-                        }
-                    }
-                }
-            });
-        }
-
-        if(status !== undefined) {
-            conditions.push({
-                nft_status: {
-                    id: {
-                        $in: JSON.parse(status)
-                    }
-                }
-            });
-        }
-
-        if(collections !== undefined) {
-            conditions.push({
-                collection: {
-                    id: {
-                        $in: JSON.parse(collections)
-                    }
-                }
-            });
-        }
-
+        const { collectionId, searchtxt } = ctx.query;
         const query = {
-            orderBy: 'id',
-            offset: (page - 1) * limit,
-            limit: limit,
+            orderBy: 'token_id',
             populate: {
                 collection: {
                     populate: ['category', 'banner', 'feature_img']
@@ -112,12 +73,15 @@ module.exports = createCoreController('api::nft-v1.nft-v1', ({strapi}) => ({
                 nft_status: '*'
             }
         };
-        if(conditions.length > 0) {
-            query.where = {
-                $and: conditions
+        query.where = {
+            collection: collectionId,
+            token_name: {
+                $contains: searchtxt
             }
-        }
-        const entity = await strapi.db.query('api::nft-v1.nft-v1').findMany(query);
-        return entity;
+
+        };
+
+        const [entity, count] = await strapi.db.query('api::nft-v1.nft-v1').findWithCount(query);
+        return { data: entity, meta: { page:1, pageSize: count, pageCount: 1, total: count } };
     }
 }));
