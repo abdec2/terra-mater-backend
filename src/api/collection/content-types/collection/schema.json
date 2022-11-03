@@ -18,7 +18,7 @@
     },
     "contract_address": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "chain_id": {
       "type": "integer",
