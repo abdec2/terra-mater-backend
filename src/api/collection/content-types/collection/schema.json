@@ -65,6 +65,9 @@
     },
     "desc": {
       "type": "text"
+    },
+    "detail_link": {
+      "type": "string"
     }
   }
 }
