@@ -68,6 +68,24 @@
     },
     "detail_link": {
       "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "etherscan": {
+      "type": "string"
+    },
+    "discord": {
+      "type": "string"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "telegram": {
+      "type": "string"
     }
   }
 }
