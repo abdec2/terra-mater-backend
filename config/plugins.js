@@ -3,17 +3,17 @@ module.exports = ({ env }) => ({
       config: {
         provider: 'nodemailer',
         providerOptions: {
-          host: 'smtp.gmail.com',
+          host: 'smtp.mail.us-east-1.awsapps.com',
           port: 465,
           secure: true,
           auth: {
-            user: 'abdec2@gmail.com',
-            pass: 'btvekjidnselujqk'
+            user: 'info@terramaternfts.com',
+            pass: 'j5oxpBN8eYo2'
           }
         },
         settings: {
-          defaultFrom: 'abdec2@gmail.com',
-          defaultReplyTo: 'abdec2@gmail.com',
+          defaultFrom: 'info@terramaternfts.com',
+          defaultReplyTo: 'info@terramaternfts.com',
         },
       },
     },
