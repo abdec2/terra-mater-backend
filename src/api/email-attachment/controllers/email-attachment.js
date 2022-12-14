@@ -17,6 +17,8 @@ module.exports = {
         html: `
           <p>Name: ${data.name}</p>
           <p>Surame: ${data.surname}</p>
+          <p>Email: ${data.email}</p>
+          <p>Phone: ${data.phone}</p>
           <p>Description: ${data.desc}</p>
           <p>Reference Link: ${data.ref_link}</p>
         `
