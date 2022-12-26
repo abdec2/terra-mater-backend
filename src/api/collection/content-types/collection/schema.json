@@ -86,6 +86,11 @@
     },
     "telegram": {
       "type": "string"
+    },
+    "feature": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }
