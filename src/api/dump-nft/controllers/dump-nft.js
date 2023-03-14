@@ -17,13 +17,14 @@ module.exports = {
             const imgUrl = item.image;
             const entryData = {
               token_name: item.name,
-              owner: '',
+              owner: '0x0f62AA2c7Ce24dd1295C2701002e8481eA1b59Bc',
               description: item.description,
               token_id: item.edition,
               token_standard: tokenStandard,
               img_url: imgUrl,
               collection: parseInt(collectionId),
               nft_status: 1,
+              price: 369,
               publishedAt: new Date().toISOString()
             }
             const nft = await strapi.entityService.create('api::nft-v1.nft-v1', {
